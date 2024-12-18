@@ -79,15 +79,18 @@ async function getOrdersRevenueFromDB(next: NextFunction) {
       {
         $group: {
           _id: null,
-          totalRevenue: { $sum: '$totalPrice' },
+          totalRevenue: { 
+            $sum: { $multiply: ["$quantity", "$totalPrice"] } 
+          },
         },
       },
     ]);
-    return result;
+    return result.length > 0 ? result[0].totalRevenue : 0; // Return totalRevenue or 0 if no data
   } catch (error) {
     next(error);
   }
 }
+
 
 export const OrderServices = {
   createOrderIntoDB,
