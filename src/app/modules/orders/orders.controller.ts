@@ -36,7 +36,6 @@ async function getOrdersRevenue(
   try {
     const result = await OrderServices.getOrdersRevenueFromDB(next);
 
-  
     if (!result || result.length === 0) {
       return errorResponse(res, 404, {
         message: 'No orders found in the database',
@@ -53,7 +52,7 @@ async function getOrdersRevenue(
       message: 'Revenue calculated successfully',
       success: true,
       data: {
-        totalRevenue: result[0].totalRevenue,
+        totalRevenue: result,
       },
     });
   } catch (error) {
