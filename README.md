@@ -175,10 +175,10 @@ MONGODB_URL= demo mongodb://localhost:27017/assignment-2
           "_id": "648a45e5f0123c45678d9012",
           "name": "The Great Gatsby",
           "author": "F. Scott Fitzgerald",
-          "price": 15,  // Price updated
+          "price": 15,  
           "category": "Fiction",
           "description": "A story about the American dream.",
-          "quantity": 25,  // Quantity updated
+          "quantity": 25,  
           "inStock": true,
           "createdAt": "2024-11-19T10:23:45.123Z",
           "updatedAt": "2024-11-19T11:00:00.000Z", 
