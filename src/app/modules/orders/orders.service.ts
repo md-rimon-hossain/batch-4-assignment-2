@@ -80,7 +80,7 @@ async function getOrdersRevenueFromDB(next: NextFunction) {
         $group: {
           _id: null,
           totalRevenue: { 
-            $sum: { $multiply: ["$quantity", "$totalPrice"] } 
+            $sum: "$totalPrice" 
           },
         },
       },
