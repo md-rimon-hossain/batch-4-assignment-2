@@ -2,7 +2,7 @@ import { NextFunction, Response } from 'express';
 import { IBook, IUpdateBook } from './books.interface';
 import { Book } from './books.model';
 
-
+// create a new book 
 async function createBookIntoDB(bookData: IBook, next: NextFunction) {
   try {
     const result = await Book.create(bookData);
@@ -12,6 +12,7 @@ async function createBookIntoDB(bookData: IBook, next: NextFunction) {
   }
 }
 
+// get all books from DB
 async function getAllBooksFromDB(next: NextFunction, searchTerm?: string) {
   try {
     // if searchTerm is not provided then get all books retrieved
@@ -34,6 +35,7 @@ async function getAllBooksFromDB(next: NextFunction, searchTerm?: string) {
   }
 }
 
+// get book by id
 async function getBookByIdFromDB(productId: string, next: NextFunction) {
   try {
     const result = await Book.findById({ _id: productId });
@@ -43,6 +45,7 @@ async function getBookByIdFromDB(productId: string, next: NextFunction) {
   }
 }
 
+// update book by id from DB
 async function updateBookIntoDB(
   res: Response,
   productId: string,
@@ -63,6 +66,7 @@ async function updateBookIntoDB(
   }
 }
 
+// delete book with specific id from DB
 async function deleteBookFromDB(productId: string, next: NextFunction) {
   try {
     const result = await Book.findOneAndDelete({ _id: productId });

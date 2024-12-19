@@ -3,6 +3,7 @@ import { BookControllers } from './books.controller';
 
 const router = express.Router();
 
+// Book Routes
 router.post('/', BookControllers.createBook);
 router.get('/', BookControllers.getAllBooks);
 router.get("/:productId", BookControllers.getBookById);

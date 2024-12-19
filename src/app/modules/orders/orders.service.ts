@@ -4,13 +4,18 @@ import { IOrder } from './orders.interface';
 import { Book } from '../books/books.model';
 import { errorResponse } from '../../utils/response';
 
+// create order
 async function createOrderIntoDB(
   res: Response,
   orderData: IOrder,
   next: NextFunction,
 ) {
   try {
+
+    // find product by id from DB
     const isProductExist = await Book.findOne({ _id: orderData.product });
+
+    // if product is not found then return error response
     if (!isProductExist) {
       return errorResponse(res, 404, {
         message: 'Product Not Found to create order',
@@ -23,6 +28,7 @@ async function createOrderIntoDB(
       });
     }
 
+    // if product is found but is out of stock then return error response - Product is out of stock
     if (isProductExist) {
       if (isProductExist.inStock === false) {
         return errorResponse(res, 400, {
@@ -36,6 +42,7 @@ async function createOrderIntoDB(
         });
       }
 
+      // if product quantity is less than order quantity then return error response - Insufficient product quantity
       if (isProductExist.quantity < orderData.quantity) {
         return errorResponse(res, 400, {
           message: 'Insufficient product quantity to create the order.',
@@ -48,6 +55,7 @@ async function createOrderIntoDB(
         });
       }
 
+      // if product quantity is greater than order quantity then create order 
       const order = await Order.create(orderData);
       if (!order) {
         return errorResponse(res, 500, {
@@ -73,8 +81,10 @@ async function createOrderIntoDB(
   }
 }
 
+// get orders revenue
 async function getOrdersRevenueFromDB(next: NextFunction) {
   try {
+    // get orders revenue from DB using aggregation pipeline (this will calculate total revenue of all orders)
     const result = await Order.aggregate([
       {
         $group: {
@@ -85,6 +95,8 @@ async function getOrdersRevenueFromDB(next: NextFunction) {
         },
       },
     ]);
+    
+    // if result is empty then return 0
     return result.length > 0 ? result[0].totalRevenue  : 0;
   } catch (error) {
     next(error);

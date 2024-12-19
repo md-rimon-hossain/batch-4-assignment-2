@@ -16,6 +16,7 @@ async function createBook(
       return next(error);
     }
 
+    // create a new book
     const result = await BookServices.createBookIntoDB(data, next);
 
     return successResponse(res, 201, {
@@ -32,6 +33,7 @@ async function getAllBooks(req: Request, res: Response, next: NextFunction) {
   try {
     const { searchTerm } = req.query;
 
+    // get all books from DB using searchTerm if provided else get all books
     const result = await BookServices.getAllBooksFromDB(
       next,
       searchTerm as string,
@@ -49,6 +51,7 @@ async function getAllBooks(req: Request, res: Response, next: NextFunction) {
 
 async function getBookById(req: Request, res: Response, next: NextFunction) {
   try {
+    // if book id is not provided then return error response with book id is required
     if (!req.params.productId) {
       errorResponse(res, 400, {
         message: 'Book id is required',
@@ -61,11 +64,13 @@ async function getBookById(req: Request, res: Response, next: NextFunction) {
       });
     }
 
+    // get book by id from DB using book id
     const result = await BookServices.getBookByIdFromDB(
       req.params.productId,
       next,
     );
 
+    // if book is not found then return error response with book not found
     if (!result) {
       return errorResponse(res, 404, {
         message: 'Book not found with this id in the database',
@@ -90,6 +95,7 @@ async function getBookById(req: Request, res: Response, next: NextFunction) {
 
 async function updateBook(req: Request, res: Response, next: NextFunction) {
   try {
+    // if book id is not provided then return error response with book id is required
     if (!req.params.productId) {
       errorResponse(res, 400, {
         message: 'Book id is required',
@@ -102,6 +108,7 @@ async function updateBook(req: Request, res: Response, next: NextFunction) {
       });
     }
 
+    // if book data is not provided then return error response with book data is required
     if (!req.body) {
       errorResponse(res, 400, {
         message: 'Book data is required',
@@ -117,10 +124,12 @@ async function updateBook(req: Request, res: Response, next: NextFunction) {
     // checking validation using zod
     const { data, success, error } = BookValidationUpdate.safeParse(req.body);
 
+    // if validation fails then return error response
     if (!success) {
       return next(error);
     }
 
+    // update book in DB
     const result = await BookServices.updateBookIntoDB(
       res,
       req.params.productId,
@@ -128,6 +137,7 @@ async function updateBook(req: Request, res: Response, next: NextFunction) {
       next,
     );
 
+    // if book is not found then return error response
     if (!result) {
       return errorResponse(res, 404, {
         message: 'Book not found with this id to update in the database',
@@ -152,6 +162,7 @@ async function updateBook(req: Request, res: Response, next: NextFunction) {
 
 async function deleteBook(req: Request, res: Response, next: NextFunction) {
   try {
+    // if book id is not provided then return error response with book id is required
     if (!req.params.productId) {
       errorResponse(res, 400, {
         message: 'Book id is required to delete book',
@@ -164,11 +175,13 @@ async function deleteBook(req: Request, res: Response, next: NextFunction) {
       });
     }
 
+    // delete book from DB using book id
     const result = await BookServices.deleteBookFromDB(
       req.params.productId,
       next,
     );
 
+    // if book is not found then return error response
     if (!result) {
       return errorResponse(res, 404, {
         message: 'Book not found with this id to delete in the database',
