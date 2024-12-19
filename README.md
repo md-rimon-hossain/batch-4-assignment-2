@@ -54,9 +54,9 @@ MONGODB_URL= demo mongodb://localhost:27017/assignment-2
 
 ## API Documentation
 
-### Car-Routes (/api/books)
+### Book-Routes (/api/products)
 
-1.  Create a new car
+1.  Create a new book
 
     - Endpoint: (POST) /api/products
            - Request Body:
