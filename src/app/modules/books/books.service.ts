@@ -2,6 +2,7 @@ import { NextFunction, Response } from 'express';
 import { IBook, IUpdateBook } from './books.interface';
 import { Book } from './books.model';
 
+
 async function createBookIntoDB(bookData: IBook, next: NextFunction) {
   try {
     const result = await Book.create(bookData);
@@ -27,6 +28,15 @@ async function getAllBooksFromDB(next: NextFunction, searchTerm?: string) {
         { category: { $regex: searchTerm, $options: 'i' } },
       ],
     });
+    return result;
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function getBookByIdFromDB(productId: string, next: NextFunction) {
+  try {
+    const result = await Book.findById({ _id: productId });
     return result;
   } catch (error) {
     next(error);
@@ -68,4 +78,5 @@ export const BookServices = {
   getAllBooksFromDB,
   updateBookIntoDB,
   deleteBookFromDB,
+  getBookByIdFromDB,
 };

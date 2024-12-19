@@ -47,6 +47,47 @@ async function getAllBooks(req: Request, res: Response, next: NextFunction) {
   }
 }
 
+async function getBookById(req: Request, res: Response, next: NextFunction) {
+  try {
+    if (!req.params.productId) {
+      errorResponse(res, 400, {
+        message: 'Book id is required',
+        success: false,
+        error: {
+          path: 'id',
+          message: 'Book id is required',
+        },
+        stack: 'No stack trace is available',
+      });
+    }
+
+    const result = await BookServices.getBookByIdFromDB(
+      req.params.productId,
+      next,
+    );
+
+    if (!result) {
+      return errorResponse(res, 404, {
+        message: 'Book not found with this id in the database',
+        success: false,
+        error: {
+          path: 'id',
+          message: 'Book not found with this id in the database',
+        },
+        stack: 'No stack trace is available',
+      });
+    }
+
+    return successResponse(res, 200, {
+      message: 'Book retrieved successfully',
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
 async function updateBook(req: Request, res: Response, next: NextFunction) {
   try {
     if (!req.params.productId) {
@@ -80,7 +121,8 @@ async function updateBook(req: Request, res: Response, next: NextFunction) {
       return next(error);
     }
 
-    const result = await BookServices.updateBookIntoDB(res,
+    const result = await BookServices.updateBookIntoDB(
+      res,
       req.params.productId,
       data,
       next,
@@ -154,4 +196,5 @@ export const BookControllers = {
   getAllBooks,
   updateBook,
   deleteBook,
+  getBookById
 };

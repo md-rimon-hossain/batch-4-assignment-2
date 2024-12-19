@@ -45,6 +45,17 @@ function getAllBooksFromDB(next, searchTerm) {
         }
     });
 }
+function getBookByIdFromDB(productId, next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const result = yield books_model_1.Book.findById({ _id: productId });
+            return result;
+        }
+        catch (error) {
+            next(error);
+        }
+    });
+}
 function updateBookIntoDB(res, productId, bookData, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -74,4 +85,5 @@ exports.BookServices = {
     getAllBooksFromDB,
     updateBookIntoDB,
     deleteBookFromDB,
+    getBookByIdFromDB,
 };

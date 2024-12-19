@@ -49,6 +49,43 @@ function getAllBooks(req, res, next) {
         }
     });
 }
+function getBookById(req, res, next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            if (!req.params.productId) {
+                (0, response_1.errorResponse)(res, 400, {
+                    message: 'Book id is required',
+                    success: false,
+                    error: {
+                        path: 'id',
+                        message: 'Book id is required',
+                    },
+                    stack: 'No stack trace is available',
+                });
+            }
+            const result = yield books_service_1.BookServices.getBookByIdFromDB(req.params.productId, next);
+            if (!result) {
+                return (0, response_1.errorResponse)(res, 404, {
+                    message: 'Book not found with this id in the database',
+                    success: false,
+                    error: {
+                        path: 'id',
+                        message: 'Book not found with this id in the database',
+                    },
+                    stack: 'No stack trace is available',
+                });
+            }
+            return (0, response_1.successResponse)(res, 200, {
+                message: 'Book retrieved successfully',
+                success: true,
+                data: result,
+            });
+        }
+        catch (error) {
+            next(error);
+        }
+    });
+}
 function updateBook(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -144,4 +181,5 @@ exports.BookControllers = {
     getAllBooks,
     updateBook,
     deleteBook,
+    getBookById
 };
