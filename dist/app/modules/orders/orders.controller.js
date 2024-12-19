@@ -55,7 +55,7 @@ function getOrdersRevenue(req, res, next) {
                 message: 'Revenue calculated successfully',
                 success: true,
                 data: {
-                    totalRevenue: result[0].totalRevenue,
+                    totalRevenue: result,
                 },
             });
         }

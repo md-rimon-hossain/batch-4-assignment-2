@@ -82,11 +82,13 @@ function getOrdersRevenueFromDB(next) {
                 {
                     $group: {
                         _id: null,
-                        totalRevenue: { $sum: '$totalPrice' },
+                        totalRevenue: {
+                            $sum: { $multiply: ["$quantity", "$totalPrice"] }
+                        },
                     },
                 },
             ]);
-            return result;
+            return result.length > 0 ? result[0].totalRevenue : 0;
         }
         catch (error) {
             next(error);
