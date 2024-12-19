@@ -70,7 +70,7 @@ MONGODB_URL= demo mongodb://localhost:27017/assignment-2
       "price": 25000,
       "category": "Sedan",
       "description": "A reliable family sedan with modern features.",
-      "quantity": 100,
+      "quantity": 100
       "inStock": true
       }
     
