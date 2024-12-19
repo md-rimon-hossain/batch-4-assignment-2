@@ -49,155 +49,144 @@ MONGODB_URL= demo mongodb://localhost:27017/assignment-2
 
 - Environment Variables
   The following environment variables are required for the application to run:
-  - PORT: The port the server will run on (default is 3000).
+  - PORT: The port the server will run on (default is 5000).
   - MONGODB_URL: The URL for your MongoDB instance.
 
 ## API Documentation
 
-### Car-Routes (/api/cars)
+### Car-Routes (/api/books)
 
 1.  Create a new car
 
-    - Endpoint: (POST) /api/cars
+    - Endpoint: (POST) /api/products
            - Request Body:
       
       ```json
       
-             {
-      "brand": "Toyota",
-      "model": "Camry",
-      "year": 2024,
-      "price": 25000,
-      "category": "Sedan",
-      "description": "A reliable family sedan with modern features.",
-      "quantity": 100
-      "inStock": true
-      }
+            {
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "price": 10,
+      "category": "Fiction",
+      "description": "A story about the American dream.",
+      "quantity": 100,
+      "inStock": true 
+      }  
     
       ```
       - Response:
       ```json
            {
-              "message": "Car created Successfully",
-              "success": true,
-              "data": {
-                "brand": "Toyota",
-                "model": "Camry",
-                "year": 2024,
-                "price": 25000,
-                "category": "Sedan",
-                "description": "A reliable family sedan with modern features.",
-                "quantity": 100,
-                "inStock": true,
-                "_id": "6749829e7b85c724cfb23c67",
-                "createdAt": "2024-11-29T09:00:14.876Z",
-                "updatedAt": "2024-11-29T09:00:14.876Z",
-                "__v": 0
-              }
-            }
+      "message": "Book created successfully",
+      "success": true,
+      "data": {
+        "_id": "648a45e5f0123c45678d9012",
+        "title": "The Great Gatsby",
+        "author": "F. Scott Fitzgerald",
+        "price": 10,
+        "category": "Fiction",
+        "description": "A story about the American dream.",
+        "quantity": 100,
+        "inStock": true,
+        "createdAt": "2024-11-19T10:23:45.123Z",
+        "updatedAt": "2024-11-19T10:23:45.123Z",
+      }
+    }
 
       ```
 
-2.  Get all cars
+2.  Get all books
 
-    - Endpoint: GET /api/cars
+    - Endpoint: GET /api/products
 
       - Response:
 
       ```json
       {
-        "message": "Cars retrieved successfully",
-        "success": true,
-        "data": [
-          {
-            "_id": "6748599ca6a54826b7d696b5",
-            "brand": "Toyota",
-            "model": "Camry",
-            "year": 2024,
-            "price": 25000,
-            "category": "Sedan",
-            "description": "A reliable family sedan with modern features.",
-            "quantity": 50,
-            "inStock": true,
-            "createdAt": "2024-11-28T11:53:00.573Z",
-            "updatedAt": "2024-11-28T11:53:00.573Z",
-            "__v": 0
-          }
-        ]
+      "message": "Books retrieved successfully",
+      "success": true,
+      "data": [
+        {
+          "_id": "648a45e5f0123c45678d9012",
+          "title": "The Great Gatsby",
+          "author": "F. Scott Fitzgerald",
+          "price": 10,
+          "category": "Fiction",
+          "description": "A story about the American dream.",
+          "quantity": 100,
+          "inStock": true,
+          "createdAt": "2024-11-19T10:23:45.123Z",
+          "updatedAt": "2024-11-19T10:23:45.123Z",
+        },
+        // ... rest data
+      ]
       }
       ```
 
-3.  Get a single car by ID
+3.  Get a single book by ID
 
-   - Endpoint: GET /api/cars/:carId
+   - Endpoint: GET /api/products/:productId
        - Response:
 
          ```json
               {
-                "message": "Car retrieved successfully",
-                "success": true,
-                "data": {
-                    "_id": "6748599ca6a54826b7d696b5",
-                    "brand": "Toyota",
-                    "model": "Camry",
-                    "year": 2024,
-                    "price": 25000,
-                    "category": "Sedan",
-                    "description": "A reliable family sedan with modern features.",
-                    "quantity": 50,
-                    "inStock": true,
-                    "createdAt": "2024-11-28T11:53:00.573Z",
-                    "updatedAt": "2024-11-28T11:53:00.573Z",
-                    "__v": 0
-                }
-    
-                }
+          "message": "Book retrieved successfully",
+          "success": true,
+          "data": {
+            "_id": "648a45e5f0123c45678d9012",
+            "title": "The Great Gatsby",
+            "author": "F. Scott Fitzgerald",
+            "price": 10,
+            "category": "Fiction",
+            "description": "A story about the American dream.",
+            "quantity": 100,
+            "inStock": true,
+            "createdAt": "2024-11-19T10:23:45.123Z",
+            "updatedAt": "2024-11-19T10:23:45.123Z",
+          }
+          }
     
           ```
 
-4.  Update a car by ID
+4.  Update a book by ID
 
-    - Endpoint: PUT /api/cars/:carId
+    - Endpoint: PUT /api/products/:productId
 
       - Request Body:
 
         ```json
         {
-          "make": "Toyota",
-          "model": "Corolla",
-          "year": 2021,
-          "price": 22000
+        "price": 15,
+        "quantity": 25,
         }
         ```
 
       - Response:
         ```json
         {
-          "message": "Car updated successfully",
-          "success": true,
-          "data": {
-            "_id": "6748599ca6a54826b7d696b5",
-            "brand": "Toyota",
-            "model": "Corolla",
-            "year": 2021,
-            "price": 22000,
-            "category": "Sedan",
-            "description": "A reliable family sedan with modern features.",
-            "quantity": 30,
-            "inStock": true,
-            "createdAt": "2024-11-28T11:53:00.573Z",
-            "updatedAt": "2024-11-29T09:05:43.641Z",
-            "__v": 0
-          }
+        "message": "Book updated successfully",
+        "success": true,
+        "data": {
+          "_id": "648a45e5f0123c45678d9012",
+          "name": "The Great Gatsby",
+          "author": "F. Scott Fitzgerald",
+          "price": 15,  // Price updated
+          "category": "Fiction",
+          "description": "A story about the American dream.",
+          "quantity": 25,  // Quantity updated
+          "inStock": true,
+          "createdAt": "2024-11-19T10:23:45.123Z",
+          "updatedAt": "2024-11-19T11:00:00.000Z",  // Updated timestamp
+        }
         }
         ```
 
-5.  Delete a car by ID
-    - Endpoint: DELETE /api/cars/:carId
+5.  Delete a book by ID
+    - Endpoint: DELETE /api/products/:productId
       - Response
       ```json
       {
-        "message": "Car deleted successfully",
+        "message": "Book deleted successfully",
         "success": true,
         "data": {}
       }
@@ -214,28 +203,28 @@ MONGODB_URL= demo mongodb://localhost:27017/assignment-2
         ```json
         {
           "email": "customer@example.com",
-          "car": "67485990a6a54826b7d696b1",
-          "quantity": 2
+          "product": "648a45e5f0123c45678d9012",
+          "quantity": 2,
+          "totalPrice": 30
         }
         ```
 
       - Response:
 
         ```json
-        {
-          "message": "Order created successfully",
-          "success": true,
-          "data": {
-            "email": "customer@example.com",
-            "car": "674984c07b85c724cfb23c73",
-            "quantity": 2,
-            "totalPrice": 25000,
-            "_id": "674984c87b85c724cfb23c76",
-            "createdAt": "2024-11-29T09:09:28.929Z",
-            "updatedAt": "2024-11-29T09:09:28.929Z",
-            "__v": 0
+         {
+            "message": "Order created successfully",
+            "success": true,
+            "data": {
+              "_id": "648b45f5e1234b56789a6789",
+              "email": "customer@example.com",
+              "product": "648a45e5f0123c45678d9012",
+              "quantity": 2,
+              "totalPrice": 30,
+              "createdAt": "2024-11-19T12:00:00.000Z",
+              "updatedAt": "2024-11-19T12:00:00.000Z",
+            }
           }
-        }
         ```
 
 2.  Get total revenue
@@ -244,16 +233,16 @@ MONGODB_URL= demo mongodb://localhost:27017/assignment-2
       - Response:
         ```json
         {
-          "message": "Total revenue fetched successfully",
-          "success": true,
-          "data": {
-            "totalRevenue": 225000
-          }
+        "message": "Revenue calculated successfully",
+        "success": true,
+        "data": {
+          "totalRevenue": 450  // Total revenue calculated from all orders
+        }
         }
         ```
 
 ## Live-Link
 
-- ### Live - [Live Link](https://batch-4-assignmnet-2.vercel.app)
+- ### Live - [Live Link](https://batch-4-assignment-2-pearl.vercel.app/)
 
-- ### Live-Vide-Explanation - [Live Video Explanation](https://drive.google.com/file/d/1zPquRqDYmQCY2yo9x6xZLvoZrmxnAcuu/view?usp=sharing)
+- ### Live-Video-Explanation - [Live Video Explanation](https://drive.google.com/file/d/1zPquRqDYmQCY2yo9x6xZLvoZrmxnAcuu/view?usp=sharing)
