@@ -1,10 +1,10 @@
-# Car Web API (Assignment 2)
+# Book Shop Web API (Assignment 2)
 
-This is a car management and order processing web API built using TypeScript, Express.js, and MongoDB. It provides functionality for managing cars and processing orders. The API follows a RESTful architecture with routes prefixed `/api`.
+This is a Book Shop management and order processing web API built using TypeScript, Express.js, and MongoDB. It provides functionality for managing books and processing orders. The API follows a RESTful architecture with routes prefixed `/api`.
 
 ## Features
 
-- CRUD operations for managing cars
+- CRUD operations for managing books
 - Ability to make orders and track revenue
 - Built using TypeScript, Express, and MongoDB
 
@@ -22,12 +22,12 @@ This is a car management and order processing web API built using TypeScript, Ex
 
 1. Clone the repository.
 2. Navigate into the project directory `cd batch-4-assignment-2`
-3. Install the required dependencies using `npm install`.
+3. Install the required dependencies using `npm install` or `yarn install`.
 
 4. Run Locally
 
 ```bash
-npm run dev
+npm run start:dev
 ```
 
 5. Build Project
@@ -36,15 +36,15 @@ npm run dev
 npm run build
 ```
 
-`Alternatively, for development mode with live reloading, use npm run dev.`
+`Alternatively, for development mode with live reloading, use npm run start:dev.`
 
 ## Environment-Variables
 
 1. Set up environment variables in a `.env` file:
 
 ```env
-MONGODB_URL=mongodb://localhost:27017/assignment-2
-PORT=3000
+PORT=5000
+MONGODB_URL= demo mongodb://localhost:27017/assignment-2
 ```
 
 - Environment Variables
