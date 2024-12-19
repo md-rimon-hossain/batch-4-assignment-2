@@ -124,7 +124,6 @@ MONGODB_URL= demo mongodb://localhost:27017/assignment-2
           "createdAt": "2024-11-19T10:23:45.123Z",
           "updatedAt": "2024-11-19T10:23:45.123Z",
         },
-        // ... rest data
       ]
       }
       ```
@@ -182,7 +181,7 @@ MONGODB_URL= demo mongodb://localhost:27017/assignment-2
           "quantity": 25,  // Quantity updated
           "inStock": true,
           "createdAt": "2024-11-19T10:23:45.123Z",
-          "updatedAt": "2024-11-19T11:00:00.000Z",  // Updated timestamp
+          "updatedAt": "2024-11-19T11:00:00.000Z", 
         }
         }
         ```
@@ -242,7 +241,7 @@ MONGODB_URL= demo mongodb://localhost:27017/assignment-2
         "message": "Revenue calculated successfully",
         "success": true,
         "data": {
-          "totalRevenue": 450  // Total revenue calculated from all orders
+          "totalRevenue": 450  
         }
         }
         ```
