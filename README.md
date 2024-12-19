@@ -1,4 +1,4 @@
-# Book Shop Web API (Assignment 2)
+# 📚 Book Shop Web API  (Level 2 batch-4 Assignment 2)
 
 This is a Book Shop management and order processing web API built using TypeScript, Express.js, and MongoDB. It provides functionality for managing books and processing orders. The API follows a RESTful architecture with routes prefixed `/api`.
 
@@ -7,6 +7,12 @@ This is a Book Shop management and order processing web API built using TypeScri
 - CRUD operations for managing books
 - Ability to make orders and track revenue
 - Built using TypeScript, Express, and MongoDB
+
+## ⚙️ Tech Stack  
+
+- **TypeScript**: Enhanced JavaScript for a better developer experience.  
+- **Express.js**: A minimalist framework for building fast and scalable APIs.  
+- **MongoDB**: A flexible NoSQL database for storing and managing data.  
 
 ## Table of Contents
 
