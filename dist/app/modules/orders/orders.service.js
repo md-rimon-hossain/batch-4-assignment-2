@@ -13,10 +13,13 @@ exports.OrderServices = void 0;
 const orders_model_1 = require("./orders.model");
 const books_model_1 = require("../books/books.model");
 const response_1 = require("../../utils/response");
+// create order
 function createOrderIntoDB(res, orderData, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            // find product by id from DB
             const isProductExist = yield books_model_1.Book.findOne({ _id: orderData.product });
+            // if product is not found then return error response
             if (!isProductExist) {
                 return (0, response_1.errorResponse)(res, 404, {
                     message: 'Product Not Found to create order',
@@ -28,6 +31,7 @@ function createOrderIntoDB(res, orderData, next) {
                     stack: 'No stack trace is available',
                 });
             }
+            // if product is found but is out of stock then return error response - Product is out of stock
             if (isProductExist) {
                 if (isProductExist.inStock === false) {
                     return (0, response_1.errorResponse)(res, 400, {
@@ -40,6 +44,7 @@ function createOrderIntoDB(res, orderData, next) {
                         stack: 'No stack trace is available',
                     });
                 }
+                // if product quantity is less than order quantity then return error response - Insufficient product quantity
                 if (isProductExist.quantity < orderData.quantity) {
                     return (0, response_1.errorResponse)(res, 400, {
                         message: 'Insufficient product quantity to create the order.',
@@ -51,6 +56,7 @@ function createOrderIntoDB(res, orderData, next) {
                         stack: 'No stack trace is available',
                     });
                 }
+                // if product quantity is greater than order quantity then create order 
                 const order = yield orders_model_1.Order.create(orderData);
                 if (!order) {
                     return (0, response_1.errorResponse)(res, 500, {
@@ -75,9 +81,11 @@ function createOrderIntoDB(res, orderData, next) {
         }
     });
 }
+// get orders revenue
 function getOrdersRevenueFromDB(next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            // get orders revenue from DB using aggregation pipeline (this will calculate total revenue of all orders)
             const result = yield orders_model_1.Order.aggregate([
                 {
                     $group: {
@@ -88,6 +96,7 @@ function getOrdersRevenueFromDB(next) {
                     },
                 },
             ]);
+            // if result is empty then return 0
             return result.length > 0 ? result[0].totalRevenue : 0;
         }
         catch (error) {

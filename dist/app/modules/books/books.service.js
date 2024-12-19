@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookServices = void 0;
 const books_model_1 = require("./books.model");
+// create a new book 
 function createBookIntoDB(bookData, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -22,6 +23,7 @@ function createBookIntoDB(bookData, next) {
         }
     });
 }
+// get all books from DB
 function getAllBooksFromDB(next, searchTerm) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -45,6 +47,7 @@ function getAllBooksFromDB(next, searchTerm) {
         }
     });
 }
+// get book by id
 function getBookByIdFromDB(productId, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -56,6 +59,7 @@ function getBookByIdFromDB(productId, next) {
         }
     });
 }
+// update book by id from DB
 function updateBookIntoDB(res, productId, bookData, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -69,6 +73,7 @@ function updateBookIntoDB(res, productId, bookData, next) {
         }
     });
 }
+// delete book with specific id from DB
 function deleteBookFromDB(productId, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {

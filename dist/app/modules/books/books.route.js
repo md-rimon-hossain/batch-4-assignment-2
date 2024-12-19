@@ -7,6 +7,7 @@ exports.BookRoutes = void 0;
 const express_1 = __importDefault(require("express"));
 const books_controller_1 = require("./books.controller");
 const router = express_1.default.Router();
+// Book Routes
 router.post('/', books_controller_1.BookControllers.createBook);
 router.get('/', books_controller_1.BookControllers.getAllBooks);
 router.get("/:productId", books_controller_1.BookControllers.getBookById);

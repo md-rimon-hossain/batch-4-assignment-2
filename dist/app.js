@@ -61,7 +61,7 @@ app.use((err, req, res, next) => {
         });
         return;
     }
-    // Generic error handler for other errors
+    // Generic error handler for other errors or Internal Server Error
     res.status(err.status || 500).json({
         message: err.message || 'Internal Server Error',
         success: false,

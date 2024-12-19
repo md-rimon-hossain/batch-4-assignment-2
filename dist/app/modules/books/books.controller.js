@@ -21,6 +21,7 @@ function createBook(req, res, next) {
             if (!success) {
                 return next(error);
             }
+            // create a new book
             const result = yield books_service_1.BookServices.createBookIntoDB(data, next);
             return (0, response_1.successResponse)(res, 201, {
                 message: 'Book created successfully',
@@ -37,6 +38,7 @@ function getAllBooks(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const { searchTerm } = req.query;
+            // get all books from DB using searchTerm if provided else get all books
             const result = yield books_service_1.BookServices.getAllBooksFromDB(next, searchTerm);
             return (0, response_1.successResponse)(res, 200, {
                 message: 'Books retrieved successfully',
@@ -52,6 +54,7 @@ function getAllBooks(req, res, next) {
 function getBookById(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            // if book id is not provided then return error response with book id is required
             if (!req.params.productId) {
                 (0, response_1.errorResponse)(res, 400, {
                     message: 'Book id is required',
@@ -63,7 +66,9 @@ function getBookById(req, res, next) {
                     stack: 'No stack trace is available',
                 });
             }
+            // get book by id from DB using book id
             const result = yield books_service_1.BookServices.getBookByIdFromDB(req.params.productId, next);
+            // if book is not found then return error response with book not found
             if (!result) {
                 return (0, response_1.errorResponse)(res, 404, {
                     message: 'Book not found with this id in the database',
@@ -89,6 +94,7 @@ function getBookById(req, res, next) {
 function updateBook(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            // if book id is not provided then return error response with book id is required
             if (!req.params.productId) {
                 (0, response_1.errorResponse)(res, 400, {
                     message: 'Book id is required',
@@ -100,6 +106,7 @@ function updateBook(req, res, next) {
                     stack: 'No stack trace is available',
                 });
             }
+            // if book data is not provided then return error response with book data is required
             if (!req.body) {
                 (0, response_1.errorResponse)(res, 400, {
                     message: 'Book data is required',
@@ -113,10 +120,13 @@ function updateBook(req, res, next) {
             }
             // checking validation using zod
             const { data, success, error } = books_validation_1.BookValidationUpdate.safeParse(req.body);
+            // if validation fails then return error response
             if (!success) {
                 return next(error);
             }
+            // update book in DB
             const result = yield books_service_1.BookServices.updateBookIntoDB(res, req.params.productId, data, next);
+            // if book is not found then return error response
             if (!result) {
                 return (0, response_1.errorResponse)(res, 404, {
                     message: 'Book not found with this id to update in the database',
@@ -142,6 +152,7 @@ function updateBook(req, res, next) {
 function deleteBook(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            // if book id is not provided then return error response with book id is required
             if (!req.params.productId) {
                 (0, response_1.errorResponse)(res, 400, {
                     message: 'Book id is required to delete book',
@@ -153,7 +164,9 @@ function deleteBook(req, res, next) {
                     stack: 'No stack trace is available',
                 });
             }
+            // delete book from DB using book id
             const result = yield books_service_1.BookServices.deleteBookFromDB(req.params.productId, next);
+            // if book is not found then return error response
             if (!result) {
                 return (0, response_1.errorResponse)(res, 404, {
                     message: 'Book not found with this id to delete in the database',
