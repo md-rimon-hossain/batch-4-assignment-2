@@ -250,4 +250,4 @@ MONGODB_URL= demo mongodb://localhost:27017/assignment-2
 
 - ### Live - [Live Link](https://batch-4-assignment-2-pearl.vercel.app/)
 
-- ### Live-Video-Explanation - [Live Video Explanation](https://drive.google.com/file/d/1zPquRqDYmQCY2yo9x6xZLvoZrmxnAcuu/view?usp=sharing)
+- ### Live-Video-Explanation - [Live Video Explanation](https://drive.google.com/file/d/1GPezVrdFt5YrqJrBhejv6E2xrHkWp_HC/view)
